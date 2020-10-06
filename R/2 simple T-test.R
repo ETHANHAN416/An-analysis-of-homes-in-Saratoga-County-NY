@@ -1,0 +1,21 @@
+res <-read.delim("C:/Users/416et/Desktop/real-estate-sample-1200.txt",header = T); #original data
+fp = subset(res, Fireplaces > 0)
+nfp = subset(res, Fireplaces == 0)
+fpsale = fp$Sale.Price
+nfpsale = nfp$Sale.Price
+summary(fpsale)
+summary(nfpsale)
+sd(fpsale)
+sd(nfpsale)
+hist(fpsale,main = "Sale price for Houses with Fireplaces", xlab = "Sale Price")
+hist(nfpsale,main = "Sale price for Houses without Fireplaces", xlab = "Sale Price")
+hist(log(fpsale),main = "Sale price for Houses with Fireplaces", xlab = "Log(Sale Price)")
+hist(log(nfpsale),main = "Sale price for Houses without Fireplaces", xlab = "Log(Sale Price)")
+t.test(log(fpsale),log(nfpsale),alternative = "greater")
+t.test(fpsale,nfpsale,alternative = "greater")
+zval = (mean(fpsale)-mean(nfpsale))/sqrt(var(fpsale)/723+var(nfpsale)/477)
+lzval = (mean(log(fpsale))-mean(log(nfpsale)))/sqrt(var(log(fpsale))/723+var(log(nfpsale))/477)
+qqnorm(log(fpsale))
+qqnorm(log(nfpsale))
+var.test(log(fpsale),log(nfpsale))
+t.test(log(fpsale),log(nfpsale), var.equal = TRUE)
